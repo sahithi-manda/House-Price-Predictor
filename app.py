@@ -2,12 +2,21 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Load the trained model
-try:
-    model = joblib.load('rf_model.joblib')
-except FileNotFoundError:
-    st.error("Model file not found. Please run the notebook first to generate 'rf_model.joblib'.")
-    st.stop()
+from train import MODEL_PATH, train_model
+
+
+@st.cache_resource
+def load_model():
+    """Load the saved model, training it first if it does not exist yet."""
+    try:
+        return joblib.load(MODEL_PATH)
+    except FileNotFoundError:
+        with st.spinner("First run: training the model (takes a few seconds)..."):
+            model, _ = train_model()
+        return model
+
+
+model = load_model()
 
 st.title("🏡 California House Price Predictor")
 st.write("This app predicts the **Median House Value** in California based on various features. It uses a Random Forest Regressor trained on the California Housing dataset.")
