@@ -18,8 +18,8 @@ The dataset used is the standard **California Housing Dataset** (fetched via `sk
 
 ## 5. Modeling and Evaluation
 Two primary models were trained and evaluated on an 80-20 train-test split:
-1. **Linear Regression:** Baseline model yielding an R² score of ~0.59 and RMSE of ~0.74.
-2. **Random Forest Regressor:** A more complex ensemble method. After initial training, hyperparameter tuning via `GridSearchCV` was applied to optimize the number of trees (`n_estimators`) and tree depth (`max_depth`). The tuned Random Forest model significantly outperformed the baseline with a high R² score and a lower RMSE.
+1. **Linear Regression:** Baseline model yielding an R² score of 0.576 and RMSE of 0.746 (≈ $74,600).
+2. **Random Forest Regressor:** A more complex ensemble method. After initial training, hyperparameter tuning via `GridSearchCV` was applied to optimize the number of trees (`n_estimators`) and tree depth (`max_depth`). The tuned Random Forest (100 trees, unlimited depth) reached R² 0.804 and RMSE 0.506 (≈ $50,600), clearly outperforming the baseline.
 
 ## 6. Business Recommendations
 Based on the feature importances extracted from our final Random Forest model:
